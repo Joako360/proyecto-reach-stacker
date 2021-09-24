@@ -1,5 +1,3 @@
-codigo para cargar en el esclavo
-
 /**
  * Ejemplo RS-485 con MAX485 y Arduino
  * 
@@ -11,8 +9,8 @@ codigo para cargar en el esclavo
  *           0x03 - leer temperatura
  *           0x04 - leer humedad
  */
-#include &lt;SoftwareSerial.h&gt;
-#include &lt;DHT.h&gt;
+#include <SoftwareSerial.h>
+#include <DHT.h>
 
 // Trama maestro-esclavo
 #define HEAD 0xAA
