@@ -1,4 +1,3 @@
-#include <SoftwareSerial.h>
 /**
  * Ejemplo RS-485 con MAX485 y Arduino
  * 
@@ -6,6 +5,7 @@
  * Roll: Master
  * Placa: Arduino MEGA 2560
  */
+#include <SoftwareSerial.h>
 
 #define HEAD 0xAA
 #define TAIL 0xFE
