@@ -126,7 +126,7 @@ void loop() {
     buff[idx] = incoming;
     idx++;
   }
-  else if ( idx &gt; 0 &amp;&amp; idx &lt; 4 ){ // 
+  else if ( idx > 0 && idx < 4 ){ // 
     buff[idx++] = incoming;      //
      
     if ( idx == 4 ){                // fin de trama
