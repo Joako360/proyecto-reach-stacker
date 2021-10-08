@@ -20,8 +20,8 @@ void setup() {
 
 void loop() {
 
-  secuencia(demora)
-  detener()
-  dellay(5000)
+  secuencia(DEMORA);
+  detener();
+  delay(5000);
 
 }

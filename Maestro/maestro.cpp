@@ -1,6 +1,6 @@
-#include <Arduino.h>
-#include <SoftwareSerial.h>
 #include "maestro.h"
+
+byte trama[4], idx;
 
 void enviarComando(byte cmd, byte data){
   trama[0] = HEAD;

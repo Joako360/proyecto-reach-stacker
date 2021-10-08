@@ -10,7 +10,6 @@
  */
 #include "esclavo.h"
 #include "28BYJ/28BYJ.h"
-#include "../global.h"
 
 void setup() {
   // Configurar Serial a 19200 baudios (para el monitor serie)

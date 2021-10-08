@@ -13,8 +13,11 @@
   // Formato de Trama: <HEAD> <CMD> <DATA> <TAIL>
   // Si es enviado por el maestro, el esclavo debe ejecuar <CMD>, posiblemente con un valor <DATA>
   // Si es enviado por el esclavo, el maestro recive <DATA> como resultado de ejecutar CMD_LEE
+
+  #include <Arduino.h>
+  #include <SoftwareSerial.h>
   
-  byte trama[4], idx;
+  extern byte trama[4], idx;
   void enviarComando(byte cmd, byte data);
   int recibirRespuesta();
 

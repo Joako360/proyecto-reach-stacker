@@ -5,7 +5,16 @@
   matriz para su definicion. 
   Alimentar Arduino con fuente de alimentacion externa de 6 a 12 Vdc.
  */
-void secuencia(demora){
+#include <Arduino.h>
+#include "28BYJ.h"
+int paso [4][4] =   // matriz (array bidimensional) con la secuencia de pasos
+{
+  {1, 1, 0, 0},
+  {0, 1, 1, 0},
+  {0, 0, 1, 1},
+  {1, 0, 0, 1}
+};
+void secuencia(int demora){
   for (int i = 0; i < 512; i++) // 512*4 = 2048 pasos
   {
     for (int j = 0; i < 4; j++)   // bucle recorre la matriz de a una fila por vez
@@ -14,12 +23,12 @@ void secuencia(demora){
       digitalWrite(IN2, paso[j][1]);
       digitalWrite(IN3, paso[j][2]);
       digitalWrite(IN4, paso[j][3]);
-      delay(demora);
+      delay(DEMORA);
     }
   }
 }
 
-void secuencia_inv(demora){
+void secuencia_inv(int demora){
   for (int i = 0; i < 512; i++) // 512*4 = 2048 pasos
   { 
    for (int j = 3; j >= 0; j--)
@@ -28,7 +37,7 @@ void secuencia_inv(demora){
       digitalWrite(IN3, paso[j][2]);  // en sentido inverso
       digitalWrite(IN2, paso[j][1]);
       digitalWrite(IN1, paso[j][0]);
-      delay(demora);
+      delay(DEMORA);
     }
   }
 }
