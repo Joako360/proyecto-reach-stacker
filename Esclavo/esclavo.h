@@ -22,7 +22,7 @@
   #include <SoftwareSerial.h>
   #include <Servo.h>      // incluye libreria de Servo
 
-  SoftwareSerial RS485(8, 9);    // RX, TX
+  extern SoftwareSerial RS485;    // RX, TX
   extern Servo servo1;           // crea objeto
   extern byte trama[4], idx;
   void enviarRespuesta( float x );
