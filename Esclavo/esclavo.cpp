@@ -1,6 +1,6 @@
 #include "esclavo.h"
 
-
+SoftwareSerial RS485(8, 9);    // RX, TX
 Servo servo1;           // crea objeto
 byte trama[4], idx;
 float peso;
