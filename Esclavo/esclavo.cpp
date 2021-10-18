@@ -1,6 +1,6 @@
 #include "esclavo.h"
 
-//SoftwareSerial RS485(8, 9);    // RX, TX
+
 Servo servo1;           // crea objeto
 AccelStepper BYJ = AccelStepper(TIPO_INTR, IN1, IN3, IN2, IN4);
 byte trama[4], idx, lec;

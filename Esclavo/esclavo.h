@@ -31,7 +31,6 @@
   #include <Servo.h>      // incluye libreria de Servo
   #include <AccelStepper.h>  // Incluir libreria AccelStepper
 
-//  extern SoftwareSerial RS485;    // RX, TX
   extern Servo servo1;           // crea objeto
   extern AccelStepper BYJ;
   extern byte trama[4], idx, lec;
