@@ -16,9 +16,16 @@
 
   #include <Arduino.h>
   #include <SoftwareSerial.h>
+  #include <AccelStepper.h>
   
+  #define DIR 2   // pin 2 como salida
+  #define STEP 3  // pin 5 como salida
+  #define TIPO_INTR 1
+
+  extern AccelStepper NEMA;
   extern byte trama[4], idx;
   void enviarComando(byte cmd, byte data);
   int recibirRespuesta();
+  bool alarma(int r);
 
 #endif // MAESTRO_H_

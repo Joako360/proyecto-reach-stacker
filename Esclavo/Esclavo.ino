@@ -9,22 +9,19 @@
  *           0x13 - Apertura/cierre de efector (escritura)
  */
 #include "esclavo.h"
-#include "28BYJ/28BYJ.h"
+//#include "28BYJ/28BYJ.h"
+//AccelStepper BYJ = AccelStepper(TIPO_INTR, IN1, IN3, IN2, IN4);
+//Servo servo1;
 
 void setup() {
-  // Configurar Serial a 19200 baudios (para el monitor serie)
+  // Configurar Serial a 19200 baudios para utilizar el bus 485 a 9600
   Serial.begin(19200);
-
-  // Configurar para utilizar el bus 485 a 9600
-  RS485.begin(9600);
   
   idx = 0;  // Indice explorador de trama entrante
-  
-  // 28BJY-48
-  pinMode(IN1, OUTPUT);   // todos los pines como salida
-  pinMode(IN2, OUTPUT);
-  pinMode(IN3, OUTPUT);
-  pinMode(IN4, OUTPUT);
+  // Set the maximum steps per second:
+  BYJ.setMaxSpeed(1000);
+  // Set the maximum acceleration in steps per second^2:
+  BYJ.setAcceleration(200);
 
   servo1.attach(PINSERVO, PULSOMIN, PULSOMAX);  // inicializacion de servo
 }
@@ -32,27 +29,16 @@ void setup() {
 
 void loop() {
 
-  if( !RS485.available() )
+  if( !Serial.available() )
     return;
 
-  byte incoming = RS485.read();
-  Serial.print("Recibido: ");
-  Serial.println(incoming);
+  Serial.readBytes(trama, 4);
     
-  if( idx == 0 ){           // principio de trama
-    if( incoming != HEAD ) // trama incorrecta
-      return;
+  if (trama[0]!=HEAD) // principio de trama incorrecta
+    return;
 
-    trama[idx] = incoming;
-    idx++;
-  }
-  else if ( idx > 0 && idx < 4 ){ // comando, dato o cola
-    trama[idx++] = incoming;      //
-     
-    if ( idx == 3 ){                // fin de trama
-      if( trama[idx] == TAIL )      // verificar que termine bien
-        ejecutarComando();          // el comando solo se ejecuta si la cola es correcta
-      idx = 0;
-    }
-  }
+  if (trama[3]==TAIL)   // verificar que fin de trama termine bien
+    ejecutarComando();          // el comando solo se ejecuta si la cola es correcta
+
+    
 }
