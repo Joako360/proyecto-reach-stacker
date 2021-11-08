@@ -4,6 +4,7 @@
 
   #define HEAD 0x02  // ASCII STX Comienza transmision
   #define TAIL 0x03 // ASCII ETX Finaliza transmision
+  #define LARGO_TRAMA 4 // tamaño de trama en bytes
   
   // Comandos soportados
   #define CMD_LEE 0x11  // Leer sensor/celda de carga
@@ -25,16 +26,18 @@
   #define IN3 6     // pin digital 6 de Arduino a IN3 de modulo ULN2003
   #define IN4 7     // pin digital 7 de Arduino a IN4 de modulo ULN2003
   #define TIPO_INTR 4  //Definir el tipo de interfaz 
+  #define VMAX 1000 // Velocidad maxima pasos por segundo
+  #define ACEL 200  // Aceleracion en pasos por segundo al cuadrado
   
   #include <Arduino.h>
-//  #include <SoftwareSerial.h>
   #include <Servo.h>      // incluye libreria de Servo
   #include <AccelStepper.h>  // Incluir libreria AccelStepper
 
   extern Servo servo1;           // crea objeto
   extern AccelStepper BYJ;
-  extern byte trama[4], idx, lec;
+  extern byte trama[LARGO_TRAMA], idx, lec;
   extern int vel;
+  void setupMotores();
   void enviarRespuesta( float x );
   void ejecutarComando();
   

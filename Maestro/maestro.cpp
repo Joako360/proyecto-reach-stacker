@@ -1,14 +1,21 @@
 #include "maestro.h"
 
 AccelStepper NEMA = AccelStepper(TIPO_INTR, STEP, DIR);
-byte trama[4], idx;
+byte trama[LARGO_TRAMA], idx;
+
+void setupMotores(){
+  // Configurar la velocidad máxima en pasos por segundo
+  NEMA.setMaxSpeed(VMAX);
+  // configurar la aceleracion en pasos por segundo^2:
+  NEMA.setAcceleration(ACEL);
+}
 
 void enviarComando(byte cmd, byte data){
   trama[0] = HEAD;
   trama[1] = cmd;
   trama[2] = data;
   trama[3] = TAIL;
-  Serial.write(trama, 4);
+  Serial.write(trama, LARGO_TRAMA);
   Serial.flush();  
 }
 
@@ -25,6 +32,9 @@ int recibirRespuesta(){
   return trama[2];
 }
 
-bool alarma(int r){
-  return (r<921)?false:true;
+void alarma(float peso){
+  if (peso > 4.5)
+    digitalWrite(LED_BUILTIN,HIGH);
+  else
+    digitalWrite(LED_BUILTIN, LOW);
 }

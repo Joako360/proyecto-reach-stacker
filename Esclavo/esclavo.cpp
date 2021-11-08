@@ -3,16 +3,25 @@
 
 Servo servo1;           // crea objeto
 AccelStepper BYJ = AccelStepper(TIPO_INTR, IN1, IN3, IN2, IN4);
-byte trama[4], idx, lec;
+byte trama[LARGO_TRAMA], idx, lec;
 int vel;
 float peso;
+
+void setupMotores(){
+  // configurar velocidad maxima en pasos por segundo:
+  BYJ.setMaxSpeed(VMAX);
+  // configurar la aceleraccion en pasos por segundo^2:
+  BYJ.setAcceleration(ACEL);
+
+  servo1.attach(PINSERVO, PULSOMIN, PULSOMAX);  // inicializacion de servo
+}
 
 void enviarRespuesta( float x ){
   trama[0] = HEAD;                          // Cabecera
   trama[1] = CMD_LEE;                        // Lectura del sensor de carga
   trama[2] = (byte)x;                       // Respuesta
   trama[3] = TAIL;                          // Cola
-  Serial.write( trama, 4 );        // transmitir mensaje
+  Serial.write( trama, LARGO_TRAMA );        // transmitir mensaje
   Serial.flush();
 }
 
@@ -30,9 +39,9 @@ void ejecutarComando(){
       // funcion 28BYJ
       lec = trama[2];
       vel = round(map(lec, 0, 255, -500, 500));
-      // Set the speed of the motor in steps per second:
+      // cambiar la velocidad del motor en pasos por segundo:
       BYJ.setSpeed(vel);
-      // Step the motor with constant speed as set by setSpeed():
+      // mover el motor con la velocidad definida en setSpeed():
       BYJ.runSpeed();
       }
       break;
