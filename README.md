@@ -2,5 +2,7 @@
 ---
 ### Por Hacer
 - [x] Comunicacion
-- [ ] Motores
-- [ ] Pesar
+- [x] Motores
+- [x] Pesar
+- [ ] Mostrar en pantalla
+- [ ] Control
